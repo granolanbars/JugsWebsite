@@ -1,0 +1,17 @@
+
+
+
+<div class="scale-effect">
+  <slot />
+</div>
+
+<style>
+    @Keyframes scaleIn {
+        from { transform: scale(0); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+    /* translateX(-100%), translateX(0) */
+    * {
+        animation: scaleIn 1s forwards;
+    }   
+</style>

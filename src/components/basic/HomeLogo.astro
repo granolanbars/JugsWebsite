@@ -1,0 +1,42 @@
+---
+const { src = '/banner.png', alt = 'Banner Image' } = Astro.props;
+---
+
+
+<div class="logo">
+  <img src={src} alt={alt} class="logo-img" />
+</div>
+
+<style>
+  .logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo-img {
+    width: 80%;
+    max-width: 1200px;
+    object-fit: cover;
+  }
+  /* @Keyframes scaleIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  * {
+    animation: scaleIn 1s forwards;
+  } */
+  @media (max-width: 600px) {
+    .logo-img {
+      width: 100%;
+    }
+  }
+</style>
+<!-- <script>
+    function scaleAnimation() {
+        const logoImg = document.querySelector('.logo');
+        
+    }
+</script> -->

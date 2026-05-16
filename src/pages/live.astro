@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro'
+import ShowsWidget from '../components/tix/ShowsWidget.astro'
+import BackButton from '../components/navigation/BackButton.astro'
+---
+
+
+<Layout title="LIVE SHOWS">
+        <div class="widget-wrapper">
+            <ShowsWidget></ShowsWidget>
+        </div>
+        <div class="game">
+            <h1>Jugs game here</h1>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .game {
+        display: flex;
+        justify-content: center;
+        align-self: center;
+
+        border: 2px solid black;
+        border-radius: 8px;
+        height: 500px;
+    }
+    @media (max-width: 768px) {
+        .game {
+            margin: 2rem;
+            height: 300px;
+        }
+
+    }
+</style>
+
+

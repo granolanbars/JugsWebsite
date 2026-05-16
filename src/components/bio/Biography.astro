@@ -1,0 +1,66 @@
+---
+const { title, text, imgSrc, imgAlt = "" } = Astro.props;
+---
+
+<section class="bio">
+  <div class="bio-text">
+    <h2>{title}</h2>
+    <p>{text}</p>
+  </div>
+
+  <div class="bio-image">
+    <img src={imgSrc} alt={imgAlt} />
+  </div>
+</section>
+
+<style>
+  .bio {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .bio-text {
+    text-align: center;
+  }
+
+  h2 {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+  }
+
+  p {
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 60ch;
+    margin: 0 auto;
+  }
+
+  .bio-image img {
+    width: 250px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    object-fit: cover;
+  }
+
+  /* Optional: side‑by‑side layout on larger screens */
+  @media (min-width: 700px) {
+    .bio {
+      flex-direction: row;
+      text-align: left;
+    }
+
+    .bio-text {
+      flex: 1;
+    }
+
+    .bio-image {
+      flex: 0 0 250px;
+    }
+  }
+</style>

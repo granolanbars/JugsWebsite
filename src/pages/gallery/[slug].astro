@@ -1,0 +1,78 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import BackButton from "../../components/navigation/BackButton.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  // Metadata lives in src/
+  const metaBase = "src/content/gallery";
+
+  // Images live in public/
+  const imageBase = "public/content/gallery";
+
+  // Read all gallery folders from src/content/gallery
+  const folders = fs.readdirSync(metaBase);
+
+  return folders.map(folder => {
+    const metaPath = path.join(metaBase, folder, "data.json");
+    const imageFolder = path.join(imageBase, folder);
+
+    // Load metadata
+    const meta = JSON.parse(fs.readFileSync(metaPath, "utf-8"));
+
+    // Load images from PUBLIC folder
+    let images = [];
+    if (fs.existsSync(imageFolder)) {
+      images = fs.readdirSync(imageFolder)
+        .filter(f => f.match(/\.(jpg|jpeg|png|webp)$/i))
+        .filter(f => f !== "poster.jpg") // poster is only for index page
+        .sort(); // optional: sorts 1.jpg, 2.jpg, 3.jpg...
+    }
+
+    return {
+      params: { slug: folder },
+      props: { folder, meta, images }
+    };
+  });
+}
+
+const { folder, meta, images } = Astro.props;
+---
+<Layout title={meta.title} subtitle={`${meta.venue}, ${new Date(meta.date).toLocaleDateString()}`}``>
+
+  <div class="grid">
+    {images.map(img => (
+      <img src={`/content/gallery/${folder}/${img}`} alt={meta.title} />
+    ))}
+  </div>
+</Layout>
+
+<style>
+  h1 {
+    margin-bottom: 0.2rem;
+    text-align: center;
+    font-size: clamp(1rem, -1.5rem + 8vw, 3rem);
+  }
+
+  p {
+    text-align: center;
+    opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  img {
+    max-width: 500px;
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+</style>

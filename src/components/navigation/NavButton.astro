@@ -1,0 +1,66 @@
+---
+const { href, img, label} = Astro.props;
+---
+
+<a
+  href={href}
+  class="nav-button"
+  style={`background-image: url('/nav-images/${img}')`}
+>
+  <span class="nav-label">{label}</span>
+</a>
+
+<style>
+  .nav-button {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    background-position: center;
+    transition: transform .2s ease;
+    display: block;
+    width: 100%;
+    min-width: 100px;
+  }
+
+  .nav-button:hover {
+    transform: scale(1.08);
+  }
+
+  .nav-label {
+    position: absolute;
+    bottom: -2.2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .2s ease, transform .2s ease;
+
+    color: rgb(0, 0, 0);
+    font-size: 1.8rem;
+    font-weight: 400;
+  }
+
+
+  .nav-button:hover .nav-label {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @media (max-width: 600px) {
+    .nav-button {
+      flex: 0 0 calc(50% - 3rem);
+      box-sizing: border-box;
+      min-width: 50px;
+    }
+    .nav-label {
+      position: absolute;
+      transform: translateX(-50%) translateY(0);
+      opacity: 100;
+      bottom: -2.2rem;
+      padding: 0;
+      margin: 0;
+      transition: opacity .2s ease;
+    }
+  }
+</style>

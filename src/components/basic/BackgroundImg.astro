@@ -1,0 +1,17 @@
+---
+const { src, alt = "", height = "100vh" } = Astro.props;
+---
+<div class="background-img">
+  <slot/>
+</div>
+
+<style define:vars={{ src, height }}>
+  .background-img {
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: var(--height);
+    width: 100%;
+  }
+</style>

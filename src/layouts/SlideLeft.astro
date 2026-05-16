@@ -1,0 +1,16 @@
+
+
+
+<div class="slide-left">
+  <slot />
+</div>
+
+<style>
+    @Keyframes slideLeft {
+        from { transform: translateX(-100%); }
+        to { transform: translateX(0); }
+    }
+    * {
+        animation: slideLeft 1s forwards;
+    }   
+</style>

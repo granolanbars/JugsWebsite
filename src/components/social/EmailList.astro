@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Jugs - Email Signup</title>
+
+    <style>
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #fff;
+        color: #000;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        display: inline-block;
+        text-decoration: none;
+      }
+      .main {
+        background-color: #fff;
+        color: #000;
+        margin: 40px auto;
+      }
+      .container-center {
+        text-align: center;
+      }
+      .container-left {
+        text-align: left;
+      }
+      .layout-wide-left {
+        max-width: 685px;
+      }
+      .layout-narrow-center {
+        max-width: 400px;
+      }
+      .layout-narrow-left {
+        max-width: 441px;
+      }
+      .newsletter-header {
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 24px;
+        top: 5px;
+        position: relative;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        font-style: normal;
+      }
+      .newsletter-header-text {
+        font-style: normal;
+        font-size: 22px;
+        line-height: 25px;
+        margin-bottom: 20px;
+      }
+      .newsletter-form {
+        display: flex;
+        justify-content: center;
+      }
+      .newsletter-form-narrow {
+        flex-direction: column;
+        align-items: center;
+      }
+      .email-input input {
+        background-color: #fff;
+        color: #000;
+        border: solid 1px #000;
+        border-radius: 2px;
+        padding: 11px 20px;
+        width: 283px;
+        font-size: 18px;
+        font-weight: 400;
+        max-width: 325px;
+      }
+      .email-input input:active,
+      .email-input input:focus-visible {
+        outline: 0;
+      }
+      input::-webkit-input-placeholder {
+        color: #000;
+        opacity: 0.5;
+      }
+      .join-button {
+        background-color: #d0021b;
+        color: #fff;
+        width: 167px;
+        padding: 0 10px;
+        border: solid 2px #d0021b;
+        border-radius: 4px;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 17px;
+        text-align: center;
+        cursor: pointer;
+        height: calc(45px - 2px - 2px);
+        max-width: calc(167px - 2px - 2px);
+      }
+      .join-button:focus {
+        outline: 0;
+      }
+      .join-button:hover, .join-button:focus {
+        -webkit-transition: background-color 1s linear;
+        -ms-transition: background-color 1s linear;
+        transition: background-color 1s linear;
+        opacity: 0.5;
+        transform: scale(1.08);
+      }
+      .join-button:hover span {
+        opacity: 1;
+      }
+      .join-button-wide {
+        margin-left: 15px;
+      }
+      .join-button-narrow {
+        margin: 22px auto;
+      }
+      .join-button span {
+        padding: calc(12px - (2px / 2)) 0 0;
+        display: inline-block;
+      }
+      .join-button svg {
+        width: 18px;
+        height: 18px;
+        top: 3px;
+        position: relative;
+        margin-right: 6px;
+      }
+      form {
+        display: flex;
+        flex-direction: row;
+      }
+      #errorMessage {
+        display: none;
+        color: #000;
+        margin: 10px 0 0;
+        justify-content: center;
+      }
+      @media only screen and (max-width: 896px) {
+        .main {
+          margin: 20px;
+        }
+        .layout-narrow-center {
+          max-width: initial;
+        }
+        .newsletter-form-wide,
+        form {
+          flex-direction: column;
+        }
+        .email-input input,
+        .join-button {
+          width: -webkit-fill-available;
+          width: -moz-available;
+          width: fill-available;
+        }
+        .join-button-wide {
+          margin: 22px auto;
+          border-radius: 4px;
+        }
+      }
+      @media only screen and (max-width: 240px) {
+        .newsletter-header {
+          height: auto;
+        }
+      }
+    </style>
+
+    <script>
+      dataLayer = [{
+        "type_of_page": "Track Button",
+        "came_from_code": 701,
+        "came_from_value": "email-signup-form",
+        "artist_name": "The Jugs",
+        "artist_id": "15638741",
+        "Version": 3,
+        "referer": ""
+      }];
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){
+        w[l]=w[l]||[];
+        w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),
+            dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-NTHLS8M');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <script type="text/javascript">
+      function openWin(e) {
+        e.preventDefault();
+        const emailInput = document.getElementById('email');
+        let emailVal = '';
+
+        if (emailInput) {
+          const errMsg = document.getElementById('errorMessage');
+          errMsg.style.display = 'none';
+          emailVal = emailInput.value;
+
+          const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+          if (!emailVal || !regex.test(emailVal)) {
+            errMsg.style.display = 'flex';
+            return false;
+          }
+        }
+
+        window.open(
+          'https://www.bandsintown.com/artist-subscribe/15638741?locale=en&came_from=701&utm_medium=web&utm_source=email_signup_form&utm_campaign=subscribe&bg-color=rgba%28255%2C255%2C255%2C1%29&cta-bg-color=rgba%28208%2C2%2C27%2C1%29&cta-border-width=2px&cta-border-radius=4px&cta-border-color=rgba%28208%2C2%2C27%2C1%29&cta-text-color=rgba%28255%2C255%2C255%2C1%29&font=Comic+Sans+MS&text-color=rgba%280%2C0%2C0%2C1%29&spn=0&signature=ZZef4b401e5476670099672aa86761d07c6cadb0ca9874ce8dec0171b4296b6cc9&newsletter_email='
+          + (emailInput ? encodeURIComponent(emailVal) : '')
+        );
+      }
+    </script>
+  </head>
+
+  <body>
+    <div class="main container-center layout-wide-center">
+      <div class="newsletter-header">Email List</div>
+      <div class="newsletter-header-text"></div>
+
+      <div class="newsletter-form newsletter-form-wide">
+        <form onsubmit="return openWin(event);">
+          <div class="email-input">
+            <input
+              id="email"
+              type="email"
+              autocomplete="off"
+              placeholder="Email Address *"
+            >
+            <div id="errorMessage">Please enter a valid email address.</div>
+          </div>
+
+          <div
+            class="join-button join-button-wide"
+            onclick="openWin(event);"
+            tabindex="0"
+          >
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="envelope"
+              class="svg-inline--fa fa-envelope fa-w-16"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                fill="currentColor"
+                d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"
+              />
+            </svg>
+            <span>Subscribe</span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-NTHLS8M"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  </body>
+</html>

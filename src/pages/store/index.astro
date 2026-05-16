@@ -1,0 +1,92 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+import fs from "node:fs";
+import path from "node:path";
+import BackButton from "../../components/navigation/BackButton.astro";
+
+// Base folder for your product metadata
+const storeBase = "src/content/store";
+
+// Get all product folders
+const folders = fs.readdirSync(storeBase).filter((name) => {
+  const full = path.join(storeBase, name);
+  return fs.statSync(full).isDirectory();
+});
+
+// Load each product's data.json
+const products = folders.map((folder) => {
+  const dataPath = path.join(storeBase, folder, "data.json");
+  const data = JSON.parse(fs.readFileSync(dataPath, "utf-8"));
+
+  return {
+    ...data,
+    coverImage: `${data.images}/${data.cover}`,
+    href: `/store/${data.slug}`
+  };
+});
+---
+
+<Layout title = "Store">
+  <main class="store-grid">
+    {products.map((p) => (
+      <a href={p.href} class="product-card">
+        <img src={p.coverImage} alt={p.title} />
+        <h2>{p.title}</h2>
+        <p class="price">${p.price}</p>
+      </a>
+    ))}
+  </main>
+</Layout>
+
+<style>
+  .store-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  /* Card as a vertical layout container */
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* keeps text aligned across cards */
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    gap: 0.75rem;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+
+  .product-card:hover {
+    transform: scale(1.03);
+    opacity: 0.9;
+  }
+
+  /* Image as a fixed-ratio visual block */
+  .product-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  /* Title block with consistent vertical space */
+  .product-card h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 1.2;
+    min-height: 2.4rem; /* ensures alignment across cards */
+  }
+
+  /* Price as a secondary text element */
+  .product-card .price {
+    margin: 0;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    text-align: center;
+  }
+</style>

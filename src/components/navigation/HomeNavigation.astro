@@ -1,0 +1,39 @@
+---
+import NavButton from './NavButton.astro';
+---
+
+<div class="nav-container">
+  <NavButton href="/live" img="live.png" label="Live" />
+  <NavButton href="/music" img="music.png" label="Music" />
+  <NavButton href="/gallery" img="gallery.png" label="Gallery" />
+  <NavButton href="/bio" img="bio.png" label="Bio" />
+  <NavButton href="/store" img="store.png" label="Store" />
+</div>
+
+<style>
+  .nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .nav-container .NavButton {
+    width: 100%;
+    margin: 0 1rem;
+    padding: auto;
+  }
+
+  @media (max-width: 600px) {
+    .nav-container {
+      gap: 3rem 3rem;
+      flex-wrap: wrap;
+      padding: none;
+      width: 100%;
+    }
+    
+  }
+</style>

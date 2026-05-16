@@ -1,0 +1,60 @@
+---
+import HomeNavigation from '../components/navigation/HomeNavigation.astro'
+import HomeLayout from '../layouts/HomeLayout.astro'
+import EmailList from '../components/social/EmailList.astro'
+import SocialsFooter from '../components/social/SocialsFooter.astro'
+import SlideLeft from '../layouts/SlideLeft.astro'
+---
+
+
+<HomeLayout title="The Jugs">
+    <div class="home-nav-wrapper">
+        <SlideLeft>
+            <HomeNavigation />
+        </SlideLeft>
+    </div>
+    
+    <div class="widgets">
+        
+        <div class="email-wrapper">
+            <EmailList />
+        </div>
+        <div class="socials-wrapper">
+            <SocialsFooter></SocialsFooter>
+        </div>
+    </div>
+    
+
+</HomeLayout>
+
+<style>
+    .home-nav-wrapper{
+        position: absolute;
+        top: 60vh;
+        left: 50vw;
+        transform: translateX(-50%);
+        width: 100%;
+    } 
+    
+    .widgets {
+        position: absolute;
+        top: 100vh;
+        left: 50vw;
+        transform: translateX(-50%);
+    }
+    .widgets > div {
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+    }
+
+    @media (max-width: 600px) {
+        .home-nav-wrapper {
+            position: relative;
+            top: 4rem;
+        }
+        .widgets {
+            position: absolute;
+            top: 100vh;
+        }
+    }
+</style>

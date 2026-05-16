@@ -1,0 +1,77 @@
+---
+const { title = "The Jugs", src = '/banner.png', alt = 'Banner Image', subtitle= ''} = Astro.props;
+---
+
+<div class="banner">
+  <div class="banner-left">
+    <a href="/" class="logo">
+      <img src={src} alt={alt} class="banner-img" />
+    </a>
+  </div>
+
+  <div class="page-title">
+    <h1>{title}</h1>
+  </div>
+
+  <div class="banner-right">
+      <h1>{subtitle}</h1>
+  </div>
+</div>
+
+
+
+<style>
+  .banner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+  }
+
+  /* Left column: logo */
+  .banner-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    width: 50%;
+  }
+
+  .banner-img {
+    width: 100%;
+    object-fit: cover;
+    transition: transform .3s ease;
+  }
+
+  .banner-img:hover {
+    transform: scale(1.08);
+  }
+
+  /* Center column: title */
+  .page-title {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .page-title h1 {
+    margin: 0;
+    font-size: 3rem;
+  }
+
+  /* Right column: empty but balances layout */
+  .banner-right {
+    flex: 1;
+  }
+
+  .banner-right h1 {
+    text-align: center;
+  }
+</style>

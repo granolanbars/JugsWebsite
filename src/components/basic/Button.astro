@@ -1,0 +1,30 @@
+---
+const { href, img, label } = Astro.props;
+---
+
+<a
+  href={href}
+  class="button"
+  style={`background-image: url('/button-images/${img}.png')`}
+>
+{label}
+</a>
+
+<style>
+  .button {
+    aspect-ratio: auto;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-indent: 100%;
+    transition: transform .2s ease;
+
+    min-width: 100%;
+    height: auto;
+  }
+
+  .button:hover {
+    transform: scale(1.08);
+  }
+</style>

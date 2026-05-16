@@ -1,0 +1,100 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import fs from "node:fs";
+import path from "node:path";
+import BackButton from "../../components/navigation/BackButton.astro";
+
+const base = "src/content/gallery";
+const folders = fs.readdirSync(base);
+
+const shows = folders
+  .map(folder => {
+    const folderPath = path.join(base, folder);
+
+    const meta = JSON.parse(
+      fs.readFileSync(path.join(folderPath, "data.json"), "utf-8")
+    );
+
+    return {
+      slug: folder,
+      title: meta.title,
+      date: new Date(meta.date),
+      venue: meta.venue,
+      cover: `/content/gallery/${folder}/poster.jpg`
+    };
+  })
+  .sort((a, b) => b.date.getTime() - a.date.getTime());
+---
+
+<Layout title="Gallery">
+
+  <div class="grid" id="galleryGrid">
+    {shows.map(show => (
+      <a
+        href={`/gallery/${show.slug}`}
+        class="card"
+        data-title={show.title.toLowerCase()}
+        data-venue={show.venue.toLowerCase()}
+        data-date={show.date.getTime()}
+      >
+        <img src={show.cover} alt={show.title} class="poster" />
+        <h2>{show.title}</h2>
+        <p>{show.date.toDateString()}</p>
+      </a>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  /* ---------------------------------------
+    Typography
+  --------------------------------------- */
+  h1 {
+    text-align: center;
+    font-size: clamp(1rem, -1.5rem + 8vw, 3rem);
+  }
+
+  h2 {
+    margin: 0.5rem 0 0;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  p {
+    margin: 0.2rem 0 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  /* ---------------------------------------
+    Gallery Grid + Cards
+  --------------------------------------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 300px));
+    gap: 2rem;
+    justify-content: center;
+    margin: 2rem;
+  }
+
+  .card {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform .2s ease;
+  }
+
+  .card:hover {
+    transform: scale(1.08);
+  }
+
+  .poster {
+    width: 100%;
+    aspect-ratio: 8.5 / 11;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+import NavBanner from "../components/navigation/NavBanner.astro";
+import '../styles/global.css';
+const { title = "The Jugs", subtitle = "" } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{title}</title>
+    <link rel="shortcut icon" sizes="518x518" type="image/png" href="/heart.png" />
+
+  </head>
+
+  <body>
+    <div class="content">
+      <NavBanner title={title} subtitle={Astro.props.subtitle} />
+      <slot />
+
+    </div>
+  </body>
+</html>
+
+<style>
+  .content {
+    padding: clamp(1rem, 4vw, 3rem);
+  }
+
+  body {
+    margin: 0;
+    background: #fff;
+    }
+</style>
